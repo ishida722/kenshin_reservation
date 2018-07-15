@@ -14,7 +14,6 @@ helpMessage = \
 '''
 
 def GetTargetHtml(course=2):
-    
     referer = 'https://www.its-kenpo.or.jp/kanri/chokuei/yoyaku/privacy_yoyaku_kojinyoyku.html'
     targetUrl = 'https://sy.its-kenpo.or.jp/kenshinyoyaku/indiv_rsv_inquire'
 
@@ -71,6 +70,12 @@ def main():
     result = NotReservedDateList(rawData)
 
     print(result)
+
+def AwsLambda(event, context):
+    targetHtml = GetTargetHtml(2)
+    rawData = GetRawData(targetHtml)
+    result = NotReservedDateList(rawData)
+    return result
 
 if __name__ == '__main__':
     main()
